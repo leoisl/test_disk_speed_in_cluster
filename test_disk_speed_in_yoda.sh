@@ -25,7 +25,7 @@ test_disk_speed_in_folder() {
   cd "$folder"
   make_random_1_GB_file
   echo "Writing and reading 1024 files of 1MB each:"
-  dd if=random_1GB_file.txt of=temp.txt bs=1048576 count=1024 oflag=dsync status=progress
+  dd if=random_1GB_file.txt of=random_1GB_file.txt.dd bs=1048576 count=1024 oflag=dsync status=progress
 }
 
 # testing
