@@ -11,7 +11,6 @@ fi
 user=$1
 hps_nobackup_folder="/hps/nobackup/research/zi/${user}"
 nfs_folder="/nfs/research1/zi/${user}"
-covid_folder="/hps/covid19_nobackup2/research/zi/${user}"
 
 # functions
 make_random_1_GB_file() {
@@ -31,4 +30,4 @@ test_disk_speed_in_folder() {
 # testing
 test_disk_speed_in_folder "$hps_nobackup_folder"
 test_disk_speed_in_folder "$nfs_folder"
-test_disk_speed_in_folder "$covid_folder"
+

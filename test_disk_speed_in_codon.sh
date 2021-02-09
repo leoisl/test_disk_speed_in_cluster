@@ -9,9 +9,8 @@ fi
 
 # default configs
 user=$1
-hps_nobackup_folder="/hps/nobackup/iqbal/${user}"
-hps_nobackup2_folder="/hps/nobackup2/iqbal/${user}"
-nfs_folder="/nfs/leia/research/iqbal/${user}"
+hps_nobackup_folder="/hps/nobackup/zi/${user}"
+nfs_folder="/nfs/research/zi/${user}"
 
 # functions
 make_random_1_GB_file() {
@@ -30,6 +29,5 @@ test_disk_speed_in_folder() {
 
 # testing
 test_disk_speed_in_folder "$hps_nobackup_folder"
-test_disk_speed_in_folder "$hps_nobackup2_folder"
 test_disk_speed_in_folder "$nfs_folder"
 
