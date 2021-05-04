@@ -3,11 +3,12 @@ set -eu
 # parameters
 if [ $# -eq 0 ]
   then
-    echo "Please provide several paths to folders to filesystems you want to test."
+    echo "Please provide paths to directories *(they must already exist!!)* inside the filesystems you want to test."
     echo "Example: ${0} /hps/nobackup/iqbal/leandro/disk_test /nfs/research/zi/leandro/disk_test /hps/software/users/iqbal/leandro/disk_test"
     echo "This will test the disk speed in /hps/nobackup, /nfs and /hps/software."
-    echo "The test will create a random 1GB file in each folder, and will write and read 1024 files of 1MB each."
+    echo "The test will create a random 1GB file in each directory, and will write and read 1024 files of 1MB each."
     echo "Please be in a worker node, so you have write acess to all filesystems."
+    echo "This is not a perfect test, but can give you hints."
     exit 1
 fi
 
