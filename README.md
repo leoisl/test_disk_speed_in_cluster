@@ -19,7 +19,10 @@ chmod +x test_disk_speed_in_cluster.sh
 
 Please provide paths to directories **(they must already exist!!)** inside the filesystems you want to test.
 
-Example: `./test_disk_speed_in_cluster.sh /hps/nobackup/iqbal/leandro/disk_test /nfs/research/zi/leandro/disk_test /hps/software/users/iqbal/leandro/disk_test`
+Example:
+```
+./test_disk_speed_in_cluster.sh /hps/nobackup/iqbal/leandro/disk_test /nfs/research/zi/leandro/disk_test /hps/software/users/iqbal/leandro/disk_test
+```
 
 This will test the disk speed in `/hps/nobackup`, `/nfs` and `/hps/software`.
 
