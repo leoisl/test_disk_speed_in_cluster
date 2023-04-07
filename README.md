@@ -1,3 +1,8 @@
+Maybe just use
+```
+sudo hdparm -tT /dev/sda1
+```
+
 # Purpose
 
 Use this script to test the read and write speed in several filesystem in the cluster when you suspect a filesystem you are using is overloaded and slow.
