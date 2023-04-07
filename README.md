@@ -1,6 +1,6 @@
 Maybe just use
 ```
-sudo hdparm -tT /dev/sda1
+sudo hdparm -t --direct /dev/sda1
 ```
 
 # Purpose
