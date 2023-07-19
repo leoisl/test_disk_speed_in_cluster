@@ -23,20 +23,18 @@ set -- "${@:1:$(($#-2))}"
 # functions
 make_random_file() {
   # size of file is specified in kilobytes
-  echo "Creating random file of size $file_size KB..."
-  base64 /dev/urandom | head -c $(($file_size * 1024)) > random_file.txt
+  echo "Creating random file..."
+  base64 /dev/urandom | head -c $(($file_size * $num_files * 1024)) > random_file.txt
 }
 
 test_disk_speed_in_folder() {
   folder=$1
   echo "Testing $folder ..."
   cd "$folder"
-  for (( i=1; i<=$num_files; i++ ))
-  do
-    make_random_file
-    echo "Writing and reading file $i of size $file_size KB:"
-    dd if=random_file.txt of=random_file_$i.txt.dd bs=1024 count=$file_size oflag=dsync status=progress
-  done
+  make_random_file
+  echo "Writing and reading file $num_files of size $file_size KB:"
+  bs_bytes=$((1024*file_size)) # calculate block size in bytes
+  dd if=random_file.txt of=random_file.txt.dd bs=$bs_bytes count=$num_files oflag=dsync status=progress
 }
 
 # testing
