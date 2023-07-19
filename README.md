@@ -1,8 +1,3 @@
-Maybe just use
-```
-sudo hdparm -t --direct /dev/sda1
-```
-
 # Purpose
 
 Use this script to test the read and write speed in several filesystem in the cluster when you suspect a filesystem you are using is overloaded and slow.
@@ -26,12 +21,12 @@ Please provide paths to directories **(they must already exist!!)** inside the f
 
 Example:
 ```
-./test_disk_speed_in_cluster.sh /hps/nobackup/iqbal/leandro/disk_test /nfs/research/zi/leandro/disk_test /hps/software/users/iqbal/leandro/disk_test
+bash test_disk_speed_in_cluster.sh /nfs/research/zi/leandro/temp /lscratch/temp/ /hps/nobackup/iqbal/leandro/test  10000 1
 ```
 
-This will test the disk speed in `/hps/nobackup`, `/nfs` and `/hps/software`.
+This will test the disk speed in `/nfs/research`, `/lscratch` and `/hps/nobackup`.
 
-The test will create a random 1GB file in each directory, and will write and read 1024 files of 1MB each.
+The test will write and read 10000 files of 1KB each.
 
 Please be in a worker node, so you have write acess to all filesystems.
 
@@ -43,39 +38,44 @@ This is not a perfect test, but can give you hints.
 
 Template:
 ```
-./test_disk_speed_in_cluster.sh <directory_1> <directory_2> ... <directory_n>
+./test_disk_speed_in_cluster.sh <directory_1> <directory_2> ... <directory_n> <number_of_files> <size_of_files_in_KB>
 ```
 
 Example:
 ```
-./test_disk_speed_in_cluster.sh /hps/nobackup/iqbal/leandro/disk_test /nfs/research/zi/leandro/disk_test /hps/software/users/iqbal/leandro/disk_test
+bash test_disk_speed_in_cluster.sh /nfs/research/zi/leandro/temp /lscratch/temp/ /hps/nobackup/iqbal/leandro/test  10000 1
 ```
 
 Output of the example:
 
 ```
-$ ./test_disk_speed_in_cluster.sh /hps/nobackup/iqbal/leandro/disk_test /nfs/research/zi/leandro/disk_test /hps/software/users/iqbal/leandro/disk_test
-Testing /hps/nobackup/iqbal/leandro/disk_test ...
-Creating random 1 GB file...
-Writing and reading 1024 files of 1MB each:
-1016070144 bytes (1.0 GB, 969 MiB) copied, 5 s, 203 MB/s
-1024+0 records in
-1024+0 records out
-1073741824 bytes (1.1 GB, 1.0 GiB) copied, 5.28495 s, 203 MB/s
-Testing /nfs/research/zi/leandro/disk_test ...
-Creating random 1 GB file...
-Writing and reading 1024 files of 1MB each:
-989855744 bytes (990 MB, 944 MiB) copied, 8 s, 124 MB/s
-1024+0 records in
-1024+0 records out
-1073741824 bytes (1.1 GB, 1.0 GiB) copied, 8.68435 s, 124 MB/s
-Testing /hps/software/users/iqbal/leandro/disk_test ...
-Creating random 1 GB file...
-Writing and reading 1024 files of 1MB each:
-973078528 bytes (973 MB, 928 MiB) copied, 5 s, 194 MB/s
-1024+0 records in
-1024+0 records out
-1073741824 bytes (1.1 GB, 1.0 GiB) copied, 5.44626 s, 197 MB/s
+------------------------------------------------------------------------
+Testing /nfs/research/zi/leandro/temp ...
+Creating random file...
+Writing and reading 10000 files, each with size 1 KB:
+8142848 bytes (8.1 MB, 7.8 MiB) copied, 3 s, 2.7 MB/s
+10000+0 records in
+10000+0 records out
+10240000 bytes (10 MB, 9.8 MiB) copied, 3.78854 s, 2.7 MB/s
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+Testing /lscratch/temp/ ...
+Creating random file...
+Writing and reading 10000 files, each with size 1 KB:
+6859776 bytes (6.9 MB, 6.5 MiB) copied, 2 s, 3.4 MB/s
+10000+0 records in
+10000+0 records out
+10240000 bytes (10 MB, 9.8 MiB) copied, 2.99414 s, 3.4 MB/s
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+Testing /hps/nobackup/iqbal/leandro/test ...
+Creating random file...
+Writing and reading 10000 files, each with size 1 KB:
+10206208 bytes (10 MB, 9.7 MiB) copied, 233 s, 43.8 kB/s
+10000+0 records in
+10000+0 records out
+10240000 bytes (10 MB, 9.8 MiB) copied, 233.349 s, 43.9 kB/s
+------------------------------------------------------------------------
 ```
 
-That means that `/hps/nobackup/` disk speed is `203 MB/s`, `/nfs` is `124 MB/s`, and `/hps/software` is `197 MB/s`. Please interpret these values as approximations. So it is safe to say that `/hps/nobackup/` and `/hps/software` has the same speed, while `/nfs` is almost twice slower.
+That means that `/nfs` disk speed is `2.7 MB/s`, `/lscratch` is `3.4 MB/s`, and `/hps/nobackup` is `43.9 kB/s`. Please interpret these values as approximations.
