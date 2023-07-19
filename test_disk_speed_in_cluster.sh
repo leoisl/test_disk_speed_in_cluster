@@ -29,12 +29,14 @@ make_random_file() {
 
 test_disk_speed_in_folder() {
   folder=$1
+  echo "------------------------------------------------------------------------"
   echo "Testing $folder ..."
   cd "$folder"
   make_random_file
-  echo "Writing and reading file $num_files of size $file_size KB:"
+  echo "Writing and reading $num_files files, each with size $file_size KB:"
   bs_bytes=$((1024*file_size)) # calculate block size in bytes
   dd if=random_file.txt of=random_file.txt.dd bs=$bs_bytes count=$num_files oflag=dsync status=progress
+  echo "------------------------------------------------------------------------"
 }
 
 # testing
